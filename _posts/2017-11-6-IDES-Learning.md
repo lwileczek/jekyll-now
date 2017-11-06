@@ -15,9 +15,9 @@
 
 ## Solutions:
 
-  1. Apply Lasso regression for variable selection. https://en.wikipedia.org/wiki/Lasso_(statistics)
-  2. Use PCA to remove multicollinearity, identify key predictors, & reduce dim. https://en.wikipedia.org/wiki/Principal_component_analysis 
-  3. Use M-Estimation to adjust for outliers in the response variable.  https://en.wikipedia.org/wiki/Robust_regression
+  1. Apply Lasso regression for variable selection. [Lasso Wiki](https://en.wikipedia.org/wiki/Lasso_(statistics))
+  2. Use PCA to remove multicollinearity, identify key predictors, & reduce dim.[PCA Wiki]( https://en.wikipedia.org/wiki/Principal_component_analysis) 
+  3. Use M-Estimation to adjust for outliers in the response variable.  [Robust Regression Wiki](https://en.wikipedia.org/wiki/Robust_regression)
 
 ## Fun Facts:
 
