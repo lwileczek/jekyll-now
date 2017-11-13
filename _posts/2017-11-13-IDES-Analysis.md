@@ -32,17 +32,16 @@
 
 ## Data Insights:
 
-  * Number of conditions and time spent in referral stage have an inverse 
-  relationship.
-  * Statistically significant variables: Army, VA rating, AF, Neurological, Endocrine.
-  (referral stage.)
   * by itself, count of conditions is *not* proportional to stage time. 
-  * It appears the more conditions one has and higher severity rating from
-  the VA, the less likely the response variable is to be an outlier.
+  * It appears the more serious a case (higher va rating and number of conditions) the less likely the time spent in each stage is to be considered an outlier. (i.e. the higher the va rating and number of conditions the less likely to have time spent in a stage be 1.5 times the 75th percentile or larger of all time spent in the stage.)
+  * Branch and VA Rating per condition seem to be significant in predicting each stage. **i.e. Rating from VA and branch are more important than which condition they have or how many conditions they have.** 
+  * Neurological and endocrine are most important *systems* in predicting stage timeliness. 
+  * Stages 1,2,8 and 12 may be linear fits. 
 
-## Why Solutions where chosen
+## Solution Explinations:
 
   1. Lasso regression is used to pick which pridictors variables should be used in the model. Lasso is used over a stepwise selection method because it applies the same penalty equally to all variables at once. This avoids giving a single variable a bias based on when it is added or removed from a model. 
   2. PCA produces predictor columns that are completely orthogonal or unrelated to eachother so there is no chance of one predictor explaining the same thing as another. It also uses a *linear* combination of all the original columns so no information is lost in the process. 
   3. M-estomation is used to create a linear model that is more resistant to outliers in the response. Generaly more expensive to compute and errors are interpreted differently than usual. 
-  4. Taking the log of skewed data can normalize it to become more linear. However, this changes the interpritation of the model. 
+  4. Taking the log of skewed data can normalize it to become more linear. However, this changes the interpritation of the model. We can use the log to talk about *percent* increases and use them as inputs for the model.
+  5. Taking out some outliers in the response variables is not completely unreasonable because we can assume the data was entered wrong and is not a true response.
