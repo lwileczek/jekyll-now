@@ -12,6 +12,7 @@
   3. bad data entry. 
   4. Large number of columns with suspected multicollinearity 
   5. Large percent of missing data.
+  6. Dispersed count data.
 
 ## Solutions:
 
@@ -19,6 +20,7 @@
   2. Use PCA to remove multicollinearity, identify key predictors, & reduce dim.[PCA Wiki]( https://en.wikipedia.org/wiki/Principal_component_analysis) 
   3. Use M-Estimation to adjust for outliers in the response variable.  [Robust Regression Wiki](https://en.wikipedia.org/wiki/Robust_regression)
   4. Peforming a log transformation to the model. [Data Transformations](https://en.wikipedia.org/wiki/Data_transformation_(statistics))
+  5. Negative Binomial Regression. [NB2 Regression](https://en.wikipedia.org/wiki/Negative_binomial_distribution)
 
 ## Background and Assumptions for Current Analysis
 
@@ -26,8 +28,11 @@
    * Number of contions for each case split out on the systems level. E.g.
      * case.id:0001 - THE SKIN:2, Neurological:3, Cardiovascular: 0, Digestive: 1, ...
    * Service (e.g. Army, Navy, Air Force, or USMC)
-   * VA rating per condition (using a sum of all ratings for all conditions per case).
-  2. Response variables are skewed right.
+   * VA rating per condition (using a sum of all ratings for all conditions per case)
+   * Geneder
+   * Active sercive vs. reserves
+   * Service level - Officer vs. Enlisted 
+  2. Count Data, with over dispersion (i.e. count data where Mean < Variance)
   3. There are errors from poor data entry. 
 
 ## Data Insights:
@@ -45,3 +50,4 @@
   3. M-estomation is used to create a linear model that is more resistant to outliers in the response. Generaly more expensive to compute and errors are interpreted differently than usual. 
   4. Taking the log of skewed data can normalize it to become more linear. However, this changes the interpritation of the model. We can use the log to talk about *percent* increases and use them as inputs for the model.
   5. Taking out some outliers in the response variables is not completely unreasonable because we can assume the data was entered wrong and is not a true response.
+  6. We need to use a Negative Binomial distribution because our variance is greater than our mean for all stages. In addition, we have descrete points, our count data. We are counting the number of days in a whole stage. 
