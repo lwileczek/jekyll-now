@@ -34,12 +34,18 @@ I would be able to go back easily for a football game, a huge plus!
 **To be updated...**
 ### Nashville
 ![alt text](https://upload.wikimedia.org/wikipedia/commons/d/db/Nashville_panorama_Kaldari_01.jpg)
+Big music city with a lot going on. I don't know a single person who as lived or visited Nashville and didn't love it.
 ### Boston
 ![alt text](https://upload.wikimedia.org/wikipedia/commons/e/ea/Boston_Financial_District_skyline.jpg)
+Historic and beautiful, Boston has a certain charm about it I cannot get away from. 
 ### Chicago
 ![alt text](https://upload.wikimedia.org/wikipedia/commons/8/82/Chicago_sunrise_1.jpg)
+Third biggest city in the US, and on top of lake Michigan. This is the biggest city on my list. Winter can be scary but the fall
+and spring are to die for. Chicago is another city that doesn't sleep so there is always something to do. I lived in west Michigan for seven years and will always have a soft spot for the mid-west. 
 ### Salt Lake City
 ![alt text](https://upload.wikimedia.org/wikipedia/commons/2/27/Saltlakecity_winter2009.jpg)
+I have never been to Salt Lake, just a layover en rout  toMontana. However, when the plane touched down between the giant mountains that 
+surround the city I couldn't believe my eyes. 
 ### Pittsburgh
-![alt text](https://upload.wikimedia.org/wikipedia/commons/7/7a/Pittsburgh_skyline7.jpg)
 ![alt text](https://upload.wikimedia.org/wikipedia/commons/4/49/Pittsburgh_Skyline.JPG)
+Beautiful and clean. Passionate sports fans. 
