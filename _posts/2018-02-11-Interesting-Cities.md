@@ -42,3 +42,4 @@ I would be able to go back easily for a football game, a huge plus!
 ![alt text](https://upload.wikimedia.org/wikipedia/commons/2/27/Saltlakecity_winter2009.jpg)
 ### Pittsburgh
 ![alt text](https://upload.wikimedia.org/wikipedia/commons/7/7a/Pittsburgh_skyline7.jpg)
+![alt text](https://upload.wikimedia.org/wikipedia/commons/4/49/Pittsburgh_Skyline.JPG)
