@@ -1,5 +1,5 @@
 # Interesting Cities
-Growing up I moved around and a few times and got used to change. I lived in Michigan, Pennsylvania, New Jersey and Virginia.
+Growing up I moved around and got used to change. I lived in Michigan, Pennsylvania, New Jersey and Virginia.
 I can see myself going many places over my life and decided I should start looking for places to visit and live.  
 Although I am pretty open to living almost anywhere, it's prudent to start doing some research and compiling a priority list.
 I am currently living in Arlington Virgina, just outside of Washington D.C.
@@ -12,6 +12,7 @@ I am currently living in Arlington Virgina, just outside of Washington D.C.
   * [Chicago](https://en.wikipedia.org/wiki/Chicago)
   * [Salt Lake City](https://en.wikipedia.org/wiki/Salt_Lake_City)
   * [Pittsburgh](https://en.wikipedia.org/wiki/Pittsburgh)
+  * [Baltimore](https://en.wikipedia.org/wiki/Baltimore)
   
 ## Breakdown
 
@@ -49,3 +50,6 @@ surround the city I couldn't believe my eyes.
 ### Pittsburgh
 ![alt text](https://upload.wikimedia.org/wikipedia/commons/4/49/Pittsburgh_Skyline.JPG)
 Beautiful and clean. Passionate sports fans. 
+### Baltimore
+![alt text](https://upload.wikimedia.org/wikipedia/commons/0/04/BaltimorePano.jpg)
+I went to visit my cousin recently who lives in Fed Hill. Beautiful place with a lot going on. Cheaper than DC.
