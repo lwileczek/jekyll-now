@@ -1,4 +1,3 @@
-# Interesting Cities
 Growing up I moved around and got used to change. I lived in Michigan, Pennsylvania, New Jersey and Virginia.
 I can see myself going many places over my life and decided I should start looking for places to visit and live.  
 Although I am open to living almost anywhere, it's prudent to start doing some research and compiling a priority list.
