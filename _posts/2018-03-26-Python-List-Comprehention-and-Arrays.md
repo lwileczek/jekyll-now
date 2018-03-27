@@ -67,7 +67,7 @@ setup = my_setup, number = n)
 This code runs in about **2.6 seconds**. Excelsior! we improved our code by about 33% by simple removing range(len(x)) and using list comprehension. 
 When possible, we should avoid looping at all. This is especially prudent when we are dealing with very large objects. This could be an array that is 1,000,000 long or a dataframe with 250,000 rows.
 Instead, we should perform what are called [vectorized](https://en.wikipedia.org/wiki/Array_programming) operations where we act on the entire array at once. 
-```
+```python
 print(timeit("""
 (x[:-1]-x[1:])/x[1:]
 """,
