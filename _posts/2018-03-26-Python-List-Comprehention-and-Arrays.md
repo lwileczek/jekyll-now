@@ -76,3 +76,5 @@ setup = my_setup, number = n)
 ```
 This code runs in about **0.05 seconds**. That's correct, almost 2 orders of magnatude faster the the original code. As the size of the object grows, the difference between the two method grows. 
 A warning though! When objects are *small*, list comprehensions may be the better choice. It's always best to speed test your code and find out what works for your situation.
+
+For further reading check out [Looping Techniques](https://docs.python.org/3.6/tutorial/datastructures.html#tut-loopidioms) from python's documents, and [Ned Batchelder's](https://nedbatchelder.com/text/iter.html) presentation from PyCon 2013. That man's a legend.
