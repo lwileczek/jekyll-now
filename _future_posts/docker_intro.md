@@ -12,9 +12,24 @@ different from CentOS.
 
 Here is an image provided by Docker that depicts the differences clearly:
 
-> image here
+![Docker slides image](/images/difference_docker_vm.png)
 
 Originally from [these slides](https://www.slideshare.net/dotCloud/docker-intro-november).
+
+## Why Docker
+So why Docker? What problems does it solve for me? Docker can be useful in a few ways. 
+
+  1. Docker containers are fast! You are able to create a new docker container, destroy one, pull from Docker Hub, and develop
+    inside them with ease. Docker containers don't take many resources from your computer and are easy to manipulate. This allows
+    a users to make reproducible development environments much faster than with a traditional Virtual Machine.
+  2. Modularity. It is possible to break down your application functionality into individual containers. 
+    It is easy to link containers together to create your application.
+    One can easily scale and update components independently in the future. 
+    For example, if you want to update your database, you can update to the newest version of postgres using the same base
+    container as you used previously and then update your application without taking everything offline.
+  3. Docker Hub! This is where there are over 100,000 containers already created. You can take these containers
+    instead of starting from scratch. This saves you time and ensures that the enviornment is setup properly. 
+    Sending and reciving containers removes the problem of "It worked on my computer but not yours". 
 
 ## Getting Docker
 
@@ -63,11 +78,23 @@ active containers or ```docker ps -a``` to display all containers.
 You should see:
 
 ```
-CONTAINER   IMAGE   COMMAND CREATED STATUS  PORTS   NAMES
-/* fill in info here */
+CONTAINER      IMAGE         COMMAND    CREATED          STATUS         PORTS    NAMES
+4c01db0b339c   ubuntu:18.04  bash       17 seconds ago   Up 16 seconds           nostalgic_bear
 ```
+Let's breakdown this output quickly. 
+  - CONTAINER is the ID for the specific container your just created.  
+  - IMAGE is the base image the container was created from.  
+  - COMMAND is the command used when you created the container.  
+  - CREATED is how long ago the container was created.  
+  - STATUS indicates wheither the container is still running or not.  
+  - PORTS are the ports in use by the container.  
+  - NAMES is the name of the specific container.  
+
+You if you do not give your container a name, one will automatically be genereated. You can activate and deactivate 
+containers by their name or ID.
 
 
+... to be continued
 
 ### More Resources:
   * [Getting Started](https://docs.docker.com/get-started/) The introduction documentation on Docker's website. This is kept current and may be your best resource.
