@@ -82,13 +82,13 @@ CONTAINER      IMAGE         COMMAND    CREATED          STATUS         PORTS   
 4c01db0b339c   ubuntu:18.04  bash       17 seconds ago   Up 16 seconds           nostalgic_bear
 ```
 Let's breakdown this output quickly. 
-  - CONTAINER is the ID for the specific container your just created.  
-  - IMAGE is the base image the container was created from.  
-  - COMMAND is the command used when you created the container.  
-  - CREATED is how long ago the container was created.  
-  - STATUS indicates wheither the container is still running or not.  
-  - PORTS are the ports in use by the container.  
-  - NAMES is the name of the specific container.  
+  - **CONTAINER** is the ID for the specific container your just created.  
+  - **IMAGE** is the base image the container was created from.  
+  - **COMMAND** is the command used when you created the container.  
+  - **CREATED** is how long ago the container was created.  
+  - **STATUS** indicates wheither the container is still running or not.  
+  - **PORTS** are the ports in use by the container.  
+  - **NAMES** is the name of the specific container.  
 
 You if you do not give your container a name, one will automatically be genereated. You can activate and deactivate 
 containers by their name or ID.
