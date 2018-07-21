@@ -1,7 +1,7 @@
 # Getting Started with Docker
 
 ## What is Docker?
-Docker is a container.
+Docker is a [container](https://en.wikipedia.org/wiki/Operating-system-level_virtualization).
 
 While a Virtual Machine (VM) is an entire guest computer running on top of your
 computer, or host machine, Docker is an isolated isolated portion of your computer. Docker shares the host kernel, operating system (OS), and sometimes its binaries and therefore more lightweight than a VM.
@@ -67,7 +67,7 @@ Now it's finally time, let's make your first container by running the following
  in bash:
 
 ```sh
-docker run ubuntu /bin/bash
+$ docker run ubuntu /bin/bash
 ```
 You may say to yourself "Self, I didn't pull the Ubuntu image, how will this work?".
 
@@ -93,6 +93,95 @@ Let's breakdown this output quickly.
 You if you do not give your container a name, one will automatically be genereated. You can activate and deactivate 
 containers by their name or ID.
 
+Now that we have pulled an image and created an image, it time to actually do something with it! First we'll stop our container we
+just created by running
+```sh
+$ docker stop nostalgic_bear
+```
+or whatever the name of your container is. Now we will create a new container using the ```-i``` and ```-t``` tags. Before we do it may be useful to find out what these are. We can use the ```--help``` tag to learn more.
+
+```sh
+$ docker run --help
+
+Usage:  docker run [OPTIONS] IMAGE [COMMAND] [ARG...]
+
+Run a command in a new container
+
+Options:
+  -i, --interactive                    Keep STDIN open even if not attached
+      --rm                             Automatically remove the container
+  -t, --tty                            Allocate a pseudo-TTY
+  -v, --volume list                    Bind mount a volume
+  -p, --publish list                   Publish a container's port(s) to
+                                       the host
+```
+
+The true list of options is quite extensive so I cut it down to the few commands that we will talk about here. It is fine if you are 
+unfamiliar with [STDIN](https://en.wikipedia.org/wiki/Standard_streams) and [Pseudo-TTY](https://en.wikipedia.org/wiki/Pseudoterminal). 
+Basically we are going to link our terminal to one in the container we create and it will run for as long as the container is active. 
+Now if we run the following we can interact inside the container.
+
+```sh
+$ docker run -it ubuntu
+
+root@f81b76b39a88:/#
+```
+
+As you can see we are now logged in as root in the container. As mentioned before, this is a lightweight version of Ubuntu and you will 
+most likely need to install all the programs you are going to want or need. When you are all done you can simply enter ```exit``` to 
+leave the container.
+
+```sh
+root@f81b76b39a88:/home# exit
+exit
+
+~/lwileczek$
+```
+
+This should stop the container as well. 
+
+## Dockerfile
+Most people don't want to create a docker container from scratch or pull a generic from Docker Hub 
+each time they want to create a new container. They know what programs they want to use, perhaps they have some files they want 
+transferd from their host machine into the container. The best way to do that is to create a [Dockerfile](https://docs.docker.com/engine/reference/builder/#usage) and use it to create your 
+contianer.  Without getting to detailed right now, you can create a file and use ```docker build .``` and create a customized 
+container. For example, let the following be your Dockerfile:
+
+```
+FROM ubuntu:15.04
+COPY . /app
+RUN make /app
+CMD python /app/app.py
+```
+
+Each instruction creates one layer:
+- FROM creates a layer from the ubuntu:15.04 Docker image.
+- COPY adds files from your Docker client’s current directory.
+- RUN builds your application with make.
+- CMD specifies what command to run within the container.  
+
+I took this example from Dockerfile best practices page linked at the bottom. 
+
+## Connecting Your Container to Your Host Machine
+
+[volumes](https://docs.docker.com/storage/volumes/) are a way to share information accross containers or between your container and host 
+machine. You can use volumes to pass data files back and fourth or to allow you to use a text editor to change code you have in your 
+container. There are [different types](https://success.docker.com/article/different-types-of-volumes) of volumes, but I'm going to 
+show you how to connect a folder on your host to one in the container so you can edit some Perl code you may have.  Let's say you have 
+the following folder:
+
+```sh
+~/Documents/my_folder$ ls
+my_code.pl  my_data.csv
+```
+You want to keep you container as small as possible so you don't want to install vim or you don't like it. To get around this you can
+create a volume to connect this folder to one in the container so when you edit ```my_code.py``` the changes will be visible to both. 
+We can create a volume by using the ```-v``` tag e.g.
+
+```sh
+$ docker run -v /path/on/host:/path/in/container ...
+```
+
 
 ... to be continued
 
@@ -100,3 +189,5 @@ containers by their name or ID.
   * [Getting Started](https://docs.docker.com/get-started/) The introduction documentation on Docker's website. This is kept current and may be your best resource.
   * [Servers for Hackers](https://serversforhackers.com/c/getting-started-with-docker) This is the blog I took most of my information from originally. It was written back in 2014 and is now a little out of date.
   * [Learn Docker in 12 Minutes](https://www.youtube.com/watch?v=YFl2mCHdv24r) A YouTube video that dives in and explains Docker pretty well.   
+  * [Docker Curriculum](http://docker-curriculum.com/) Written back in 2015, but shows how to get get started with AWS and web applications. 
+  * [Dockerfile Best-Practices](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/)
