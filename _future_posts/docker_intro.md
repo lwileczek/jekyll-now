@@ -135,7 +135,7 @@ leave the container.
 root@f81b76b39a88:/home# exit
 exit
 
-~/lwileczek$
+lwileczek:~/Documents$
 ```
 
 This should stop the container as well. 
@@ -172,7 +172,7 @@ the following folder:
 
 ```sh
 ~/Documents/my_folder$ ls
-my_code.pl  my_data.csv
+ my_code.pl  my_data.csv
 ```
 You want to keep you container as small as possible so you don't want to install vim or you don't like it. To get around this you can
 create a volume to connect this folder to one in the container so when you edit ```my_code.py``` the changes will be visible to both. 
@@ -181,7 +181,33 @@ We can create a volume by using the ```-v``` tag e.g.
 ```sh
 $ docker run -v /path/on/host:/path/in/container ...
 ```
+You must use a full path on both ends to connect the two folders properly. So if you are on windows you it would something like:
 
+```sh
+> docker run -v C:\Users\JohnSmith\Documents\my_folder:/home/my_folder -it ubuntu bash
+
+root@accce7d7da8f:/# ls home/my_folder
+ my_code.pl  my_data.csv
+```
+
+To show we can edit the file from our host machine see the edits in the container we must first check what the file looks like, then 
+detach from our container, update the file then attach ourselves again. 
+
+```sh
+root@accce7d7da8f:/# cd home/my_folder
+root@accce7d7da8f:/home/my_folder# cat my_code.pl
+#!/usr/bin/perl
+print "Hello, World!\n";
+root@accce7d7da8f:/home/my_folder#
+```
+To detatch from a container we are currently in an interactive session with we can use ```ctrl+p+q```. You should see something similar
+to: 
+
+```sh
+root@accce7d7da8f:/home/p# read escape sequence
+```
+
+This did not stop the container. We can verify this by running ```$ docker ps```.
 
 ... to be continued
 
