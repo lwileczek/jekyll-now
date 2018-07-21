@@ -204,10 +204,53 @@ To detatch from a container we are currently in an interactive session with we c
 to: 
 
 ```sh
-root@accce7d7da8f:/home/p# read escape sequence
+ home/p# read escape sequence
 ```
 
-This did not stop the container. We can verify this by running ```$ docker ps```.
+This did not stop the container. We can verify this by running ```$ docker ps```. You can now use your favorite editor to change our 
+file ```my_code.pl``` to:
+
+```Perl
+#!/usr/bin/perl
+print "I love Docker!\n";
+```
+Now to get back into our container we'll use the ```attach``` command. 
+
+```Shell
+$ docker attach --help
+
+Usage:  docker attach [OPTIONS] CONTAINER
+
+Attach local standard input, output, and error streams to a running container
+
+Options:
+      --detach-keys string   Override the key sequence for detaching a
+                             container
+      --no-stdin             Do not attach STDIN
+      --sig-proxy            Proxy all received signals to the process
+                             (default true)
+ 
+$ docker attach accce7d7da8f
+root@accce7d7da8f:/home/my_folder#
+```
+
+Notice, we are still in the same directory as we were before. Executing our file we can see that it did indeed update!
+```Shell
+root@accce7d7da8f:/home/my_folder# ./my_code.pl
+I Love Docker!
+```
+
+Another way for containers to talk to the outside world is by exposing ports. This is useful to have the container talk to the outside 
+world in general. Using [networks](https://docs.docker.com/network/) is one of the main features of Docker. Eventually you should learn 
+how to use [Bridge Networks](https://docs.docker.com/network/bridge/) which is how you can get containers to work with eachother. I'm 
+Going to provide a quick example of how to get docker to communicate with your host machine using the ```-p``` tag. The ```-p``` after 
+```docker run``` is to publish and link ports from the container to the host. The proper use is 
+```
+$ docker run -p host-port:container-port ...
+```
+
+
+[This](https://docs.docker.com/network/links/#connect-using-network-port-mapping) is a great resource if you want to know more. 
 
 ... to be continued
 
