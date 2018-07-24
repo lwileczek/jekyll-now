@@ -76,6 +76,8 @@ sass:
 gems:
   - jekyll-sitemap # Create a sitemap using the official Jekyll sitemap gem
   - jekyll-feed # Create an Atom feed using the official Jekyll feed gem
+
+gem "github-pages", group: :jekyll_plugins
   
 theme: jekyll-theme-cayman
 
