@@ -259,15 +259,53 @@ I Love Docker!
 
 Another way for containers to talk to the outside world is by exposing ports. Using [networks](https://docs.docker.com/network/) is one of the most important features of Docker. 
 Eventually, you should learn 
-how to use [Bridge Networks](https://docs.docker.com/network/bridge/) which is how you can get containers to work with each other. But here, I'm 
-Going to provide a quick example of how to get docker to communicate with your host machine using the ```-p``` tag. The ```-p``` after 
+how to use [Bridge Networks](https://docs.docker.com/network/bridge/) which is how you can get containers to work with each other. [This](https://docs.docker.com/network/links/#connect-using-network-port-mapping) is a great resource if you want to know 
+more about connecting containers. But here, I'm 
+Going to provide a quick example of how to get docker to communicate with your host machine using the ```-p``` tag. The ```-p``` 
+after 
 ```docker run``` is to publish and link ports from the container to the host. The proper use is 
 ```
 $ docker run -p host-port:container-port ...
 ```
+For example, you can run:
+```sh
+$ docker run -p 8080:5000 ubuntu bash
+```
+which will map port 5000 inside the container to 8080 on your computer.  It can be easier to understand if we walk through an 
+example. Let's create a container with a simple _Hello World_ html file and run it on port 8000 using Python. 
+We'll start by creating a new folder and putting a Dockerfile and HTML file inside. The Dockerfile should be:
+```
+FROM ubuntu:18.04
+COPY . /app
+RUN apt update \
+    apt install python3-minimal \
+    make /app
+CMD python3 -m http.server
+```
+The HTML file should simple be:
+```html
+<DOCTYPE html>
+<html>
+  <body>
+    <h1>Hello, World!</h1>
+  </body>
+</html>
+```
+Make sure to navigate to the folder we just created before using the following command. First we'll build the new image from
+our Dockerfile and then use that image to create a container. 
+```sh
+$ docker build .
+```
+If a name is not given to ```docker build``` it will check the folder for a file named DockerFile. We'll need the ID for the 
+image we just created. We can find this using the following command:
+```sh
+$ docker images
+```
 
-[This](https://docs.docker.com/network/links/#connect-using-network-port-mapping) is a great resource if you want to know more. 
-
+Then we use the ID to create our container:
+```sh
+$ docker run -p 8888:8000 <docker image id>
+```
 ... to be continued
 
 ### More Resources:
