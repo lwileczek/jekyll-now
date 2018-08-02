@@ -59,6 +59,7 @@ permalink: /:title/
 version: v1.2.0
 
 # Jekyll 3 now only supports Kramdown for Markdown
+theme: minima
 kramdown:
   # Use GitHub flavored markdown, including triple backtick fenced code blocks
   input: GFM
@@ -78,8 +79,9 @@ gems:
   - jekyll-feed # Create an Atom feed using the official Jekyll feed gem
 
 gem "github-pages", group: :jekyll_plugins
+gem "minima"
   
-theme: jekyll-theme-cayman
+
 
 # Exclude these files from your production _site
 exclude:
