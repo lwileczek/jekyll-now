@@ -295,7 +295,7 @@ our Dockerfile and then use that image to create a container.
 ```sh
 $ docker build .
 ```
-If a name is not given to ```docker build``` it will check the folder for a file named DockerFile. We'll need the ID for the 
+If a name is not given to ```docker build``` it will check the folder for a file named Dockerfile. We'll need the ID for the 
 image we just created. We can find this using the following command:
 ```sh
 $ docker images
