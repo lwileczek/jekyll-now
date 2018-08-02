@@ -276,15 +276,14 @@ example. Let's create a container with a simple _Hello World_ html file and run 
 We'll start by creating a new folder and putting a Dockerfile and HTML file inside. The Dockerfile should be:
 ```
 FROM ubuntu:18.04
-COPY . /app
-RUN apt update \
-    apt install python3-minimal \
-    make /app
-CMD python3 -m http.server
+COPY index.html /
+RUN apt update
+RUN apt install -y python3-minimal
+CMD ["bash"]
 ```
-The HTML file should simple be:
+The HTML file should be named ```index.html``` and should be:
 ```html
-<DOCTYPE html>
+<!DOCTYPE html>
 <html>
   <body>
     <h1>Hello, World!</h1>
@@ -301,14 +300,47 @@ image we just created. We can find this using the following command:
 ```sh
 $ docker images
 ```
-
-Then we use the ID to create our container:
+The output will look something like:
 ```sh
-$ docker run -p 8888:8000 <docker image id>
+REPOSITORY                 TAG                 IMAGE ID            CREATED             SIZE
+<none>                     <none>              3efb5e1e1c8c        42 seconds ago      157MB
+<none>                     <none>              f1e12001051e        13 minutes ago      122MB
+python                     latest              746a826ed9d7        2 weeks ago         922MB
+ubuntu                     latest              74f8760a2a8b        2 weeks ago         82.4MB
+<none>                     <none>              837806c31088        6 weeks ago         498MB
+ubuntu                     18.04               113a43faa138        8 weeks ago         81.2MB
 ```
-... to be continued
+Then we use the ID of the image we just created to start a container. 
+```sh
+$ docker run -it --rm -p 8888:8000 3efb5e1e1c8c bash
+```
+In the container run
+```sh
+root@bdbfba60586d:/# python3 -m http.server
+```
+After you run this command in you should see the following response:
+```sh
+Serving HTTP on 0.0.0.0 port 8000 (http://0.0.0.0:8000/) ...
+```
+which means it has started a local host server on port ```8000``` in the container. Since we map it to ```8888``` on our host machine, 
+you should go into your web-browser and go to ```http://localhost:8888```.  You should see our lovely "Hello, World!".  It is 
+interesting to note that you don't have to pick a port on your host machine. You can have docker automatically pick an open port by just 
+omitting that part of the command. For example, you can run
+```sh
+docker run -dt -p :8000 3efb5e1e1c8c
+```
+and then use ```docker -ps``` to check our running containers. 
+```sh
+$ docker ps
+CONTAINER ID    IMAGE           COMMAND    CREATED          STATUS          PORTS                      NAMES
+c79e816c9ae0    b9d14cb0304c    "bash"     3 seconds ago    Up 2 seconds    0.0.0.0:32770->8000/tcp    upbeat_kapitsa
+```
+As you can see above, Docker mapped port ```8000``` in the container to port ```32770``` on my host machine. 
 
-### More Resources:
+## Conclusion
+I hope you found this introduction useful and easy to follow. Feel free to reach out to me if you have any questions!
+
+## More Resources:
   * [Getting Started](https://docs.docker.com/get-started/) The introduction documentation on Docker's website. This is kept current and may be your best resource.
   * [Servers for Hackers](https://serversforhackers.com/c/getting-started-with-docker) This is the blog I took most of my information from originally. It was written back in 2014 and is now a little out of date.
   * [Learn Docker in 12 Minutes](https://www.youtube.com/watch?v=YFl2mCHdv24r) A YouTube video that dives in and explains Docker pretty well.   
