@@ -85,6 +85,7 @@ You should see:
 CONTAINER      IMAGE         COMMAND    CREATED          STATUS         PORTS    NAMES
 4c01db0b339c   ubuntu:18.04  bash       17 seconds ago   Up 16 seconds           nostalgic_bear
 ```
+
 Let's breakdown this output quickly. 
   - **CONTAINER** is the ID for the specific container your just created.  
   - **IMAGE** is the base image the container was created from.  
@@ -100,14 +101,14 @@ containers by their name or ID.
 Now that we have pulled an image and created an image, it time to actually do something with it! First we'll stop our container we
 just created by running
 
-```sh
+```Shell
 $ docker stop nostalgic_bear
 ```
 
 or whatever the name of your container is. Now we will create a new container using the ```-i``` and ```-t``` tags. Before we do, it may be useful to find out what these tags mean.
 We can use the ```--help``` tag to learn more.
 
-```sh
+```Shell
 $ docker run --help
 
 Usage:  docker run [OPTIONS] IMAGE [COMMAND] [ARG...]
@@ -128,19 +129,19 @@ unfamiliar with [STDIN](https://en.wikipedia.org/wiki/Standard_streams) and [Pse
 Basically we are going to link our terminal, or command prompt, to the container we create and it will run for as long as the container is active. 
 Now if we run the following we can interact inside the container.
 
-```sh
+```Shell
 $ docker run -it ubuntu
 ```
 
 You should see the following output:
-```sh
+```Shell
 root@f81b76b39a88:/#
 ```
 
 This shows that we are now logged in as root in the container. When you are all done you can simply run the ```exit``` command to 
 leave the container.
 
-```sh
+```Shell
 root@f81b76b39a88:/home# exit
 ```
 
@@ -179,7 +180,7 @@ container. There are [different types](https://success.docker.com/article/differ
 show you how to connect a folder on your host to one in the container so you can edit some Perl code.  Let's say you have 
 the following folder on your host machine:
 
-```sh
+```Shell
 ~/Documents/my_folder$ ls
  my_code.pl  my_data.csv
 ```
@@ -188,18 +189,19 @@ To make edits to this code inside of a container, you can
 create a volume to connect this folder to one in the container so when you edit ```my_code.py``` the changes will be made to both. 
 We can create a volume by using the ```-v``` tag e.g.
 
-```sh
+```Shell
 $ docker run -v /path/on/host:/path/in/container ...
 ```
+
 You must use a full path on both ends to connect the two folders properly. So if you are on windows it would look something like:
 
-```sh
+```Shell
 $ docker run -v C:\Users\JohnSmith\Documents\my_folder:/home/my_folder -it ubuntu bash
 ```
 
 Then you can run the `ls` command inside of your Docker container to check and see those files are now present.
 
-```sh
+```Shell
 root@accce7d7da8f:/# ls home/my_folder
  my_code.pl  my_data.csv
 ```
@@ -208,7 +210,7 @@ To show that we can edit the file on our host machine and see the edits in the c
 detach from our container, update the file, and then attach ourselves again. Below, we navigate to our folder on our host machine using `cd`, and then
 use `cat` to output the contents of the file `my_code.pl`.
 
-```sh
+```Shell
 root@accce7d7da8f:/# cd home/my_folder
 root@accce7d7da8f:/home/my_folder# cat my_code.pl
 #!/usr/bin/perl
@@ -218,7 +220,7 @@ print "Hello, World!\n";
 To detatch from a container we are currently connected to in an interactive session we can use ```ctrl+p+q```. You should see something similar
 to: 
 
-```sh
+```Shell
  home/p# read escape sequence
 ```
 
@@ -272,16 +274,21 @@ more about connecting containers. But here, I'm
 Going to provide a quick example of how to get docker to communicate with your host machine using the ```-p``` tag. The ```-p``` 
 after 
 ```docker run``` is to publish and link ports from the container to the host. The proper use is 
-```
+
+```Shell
 $ docker run -p host-port:container-port ...
 ```
-For example, you can run:
-```sh
+
+For example, you can run
+
+```Shell
 $ docker run -p 8080:5000 ubuntu bash
 ```
+
 which will map port 5000 inside the container to 8080 on your computer.  It can be easier to understand if we walk through an 
 example. Let's create a container with a simple _Hello World_ html file and run it on port 8000 using Python. 
 We'll start by creating a new folder and putting a Dockerfile and HTML file inside. The Dockerfile should be:
+
 ```
 FROM ubuntu:18.04
 COPY index.html /
@@ -289,7 +296,9 @@ RUN apt update
 RUN apt install -y python3-minimal
 CMD ["bash"]
 ```
+
 The HTML file should be named ```index.html``` and should be:
+
 ```html
 <!DOCTYPE html>
 <html>
@@ -298,18 +307,24 @@ The HTML file should be named ```index.html``` and should be:
   </body>
 </html>
 ```
+
 Make sure to navigate to the folder we just created before using the following command. First we'll build the new image from
 our Dockerfile and then use that image to create a container. 
-```sh
+
+```Shell
 $ docker build .
 ```
+
 If a name is not given to ```docker build``` it will check the folder for a file named Dockerfile. We'll need the ID for the 
 image we just created. We can find this using the following command:
-```sh
+
+```Shell
 $ docker images
 ```
+
 The output will look something like:
-```sh
+
+```Shell
 REPOSITORY                 TAG                 IMAGE ID            CREATED             SIZE
 <none>                     <none>              3efb5e1e1c8c        42 seconds ago      157MB
 <none>                     <none>              f1e12001051e        13 minutes ago      122MB
@@ -318,31 +333,42 @@ ubuntu                     latest              74f8760a2a8b        2 weeks ago  
 <none>                     <none>              837806c31088        6 weeks ago         498MB
 ubuntu                     18.04               113a43faa138        8 weeks ago         81.2MB
 ```
+
 Then we use the ID of the image we just created to start a container. 
-```sh
+
+```Shell
 $ docker run -it --rm -p 8888:8000 3efb5e1e1c8c bash
 ```
+
 In the container run
-```sh
+
+```Shell
 root@bdbfba60586d:/# python3 -m http.server
 ```
+
 After you run this command in you should see the following response:
-```sh
+
+```Shell
 Serving HTTP on 0.0.0.0 port 8000 (http://0.0.0.0:8000/) ...
 ```
+
 which means it has started a local host server on port ```8000``` in the container. Since we map it to ```8888``` on our host machine, 
 you should go into your web-browser and go to ```http://localhost:8888```.  You should see our lovely "Hello, World!".  It is 
 interesting to note that you don't have to pick a port on your host machine. You can have docker automatically pick an open port by just 
 omitting that part of the command. For example, you can run
-```sh
+
+```Shell
 docker run -dt -p :8000 3efb5e1e1c8c
 ```
-and then use ```docker -ps``` to check our running containers. 
-```sh
+
+and then use ```docker -ps``` to check our running containers.
+
+```Shell
 $ docker ps
 CONTAINER ID    IMAGE           COMMAND    CREATED          STATUS          PORTS                      NAMES
 c79e816c9ae0    b9d14cb0304c    "bash"     3 seconds ago    Up 2 seconds    0.0.0.0:32770->8000/tcp    upbeat_kapitsa
 ```
+
 As you can see above, Docker mapped port ```8000``` in the container to port ```32770``` on my host machine. 
 
 ## Conclusion
