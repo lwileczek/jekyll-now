@@ -5,7 +5,7 @@ a container, you'd have to make sure your client had the same version of the lib
 package up your code along with the software or libraries required to run it, and send it to the client as a single package.
 
 Docker containers are similar to Virtual Machines, but are better in a few ways. While a Virtual Machine (VM) is an entire guest computer running on top of your
-computer, or host machine, Docker is an isolated isolated portion of your computer that can share some of your computer's resources. 
+computer, or host machine, Docker is an isolated portion of your computer that can share some of your computer's resources. 
 Docker shares the host kernel, operating system (OS), and sometimes host binaries, and therefore is more lightweight than a VM.
 
 For example, if you are running a server with CentOS and have a Docker Container
@@ -154,10 +154,13 @@ and use it to create your container.  Without getting too detailed right now, yo
 container. For example, let the following be your Dockerfile:
 
 ```
-FROM ubuntu:15.04
-COPY . /app
-RUN make /app
-CMD python /app/app.py
+FROM ubuntu:18.04
+COPY index.html /
+# Update Ubuntu software repository
+RUN apt update
+# Download python
+RUN apt install -y python3-minimal
+CMD ["bash"]
 ```
 
 Each instruction creates one layer:
@@ -251,9 +254,16 @@ $ docker attach accce7d7da8f
 
 Notice, we are still in the same directory as we were before. By executing our file we can see that it did indeed update!
 ```Shell
-root@accce7d7da8f:/home/my_folder# ./my_code.pl
-I Love Docker!
+root@accce7d7da8f:/home/my_folder# cat my_code.pl
+#!/usr/bin/perl
+print "I love Docker!\n";
 ```
+> _Aside:_ you can use the following linux command to make our file an executable and then run the perl file:
+> ```sh
+> root@accce7d7da8f:/home/my_folder# chmod u+x my_code.pl
+> root@accce7d7da8f:/home/my_folder# ./my_code.pl
+> I love Docker!
+> ```
 
 Another way for containers to talk to the outside world is by exposing ports. Using [networks](https://docs.docker.com/network/) is one of the most important features of Docker. 
 Eventually, you should learn 
