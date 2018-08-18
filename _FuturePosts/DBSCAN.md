@@ -36,16 +36,33 @@ assumes that clusters are convex shaped.
 So we gain a little bit more flexability. Below we'll see some examples of how
 DBSCAN outperforms K-Means.
 
-## Algorithm Overview
-When constructing the DBSCAN algorithm we need three things:
-  1. Minimum amount of points (minPts)
-  2. Distance function (dist\_func)
-  3. Distance from each point (Eps)
-
-> ASIDE: Eps stands for epsilon, the greek letter, which is used in mathematics
-> to represent a region around an object. An arbitrary but common choice.
-
-
+## Algorithm Overview 
+When constructing the DBSCAN algorithm we need four things: 
+  1. Minimum amount of points (minPts) 
+  2. Distance function (dist\_func) 
+  3. Distance from each point (Eps) 
+  4. data 
+ 
+> ASIDE: Eps stands for epsilon, the greek letter, which is used in mathematics 
+> to represent a region around an object. An arbitrary but common choice.  
+ 
+To perform DBSCAN we'll have to check each point and count its neighbors within  
+the given distance.  Then we'll drop all points that don't have at least minPts  
+neighbors. Now that we have our core points we'll have to find all reachable  
+points for each core point to create our clusters.  
+ 
+## Writing the algorithm 
+To write this algorithm I'll be using Python 3.6 and Numpy 1.15.  
+ 
+## Examples 
+Sci-Kit Learn has a built-in DBSCAN which we can use to test out some examples  
+and compare to our implimitation written above. 
+ 
+## Caveats 
+When DBSCAN doesn't work 
+OPTICS 
+ 
+## Further reading 
 
 ## Bibliography
   - Figure 1 By Chire [CC BY-SA 3.0  (https://creativecommons.org/licenses/by-SA/3.0)], from Wikimedia Commons
