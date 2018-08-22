@@ -202,9 +202,9 @@ If we were to naively apply K-Means we wouldn't be able to predict these two gro
 
 ![k-means circles](/images/kmeans_circles.png)
 
-K-means struggles with the moons because they are not convex which is one of K-means assumptions. The problem with the circles is 
-the centroids cannot overlap and if they did it would return a single cluster. However, by applying DBSCAN which doesn't assume 
-the shape of the data but proxmity between points we get the following results:
+K-means struggles with the moons because they are not [convex](https://en.wikipedia.org/wiki/Convex_set) which is one of 
+K-means assumptions. The problem with the circles is the centroids cannot overlap and if they did it would return a single cluster. 
+However, by applying DBSCAN which doesn't assume the shape of the data but proxmity between points we get the following results:
 
 ![my moons](/images/my_dbscan.png)
 
