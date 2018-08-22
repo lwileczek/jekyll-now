@@ -202,17 +202,18 @@ If we were to naively apply K-Means we wouldn't be able to predict these two gro
 
 ![k-means circles](/images/kmeans_circles.png)
 
-the problem with the moons is they are not convex which is one of K-means assumptions. The problem with the circles is 
-the centroids cannot overlap and if they did it would return a single cluster. However, applying our code above we get the 
-following results:
+K-means struggles with the moons because they are not convex which is one of K-means assumptions. The problem with the circles is 
+the centroids cannot overlap and if they did it would return a single cluster. However, by applying DBSCAN which doesn't assume 
+the shape of the data but proxmity between points we get the following results:
 
 ![my moons](/images/my_dbscan.png)
 
 ![my moons](/images/my_circles.png)
 
-![Like a glove](https://media.giphy.com/media/YpRuexuyaJQ0U/giphy.gif)
+![Like a glove](https://media.giphy.com/media/YpRuexuyaJQ0U/giphy.gif)  
+
 What a B-E-A-utiful algorithm. Lucky for us, DBSCAN has been added to many standard packages in Python, R, C# or whatever you 
-code in. If, like me, you are fond of python, Sci-Kit learn has DBSCAN built in with some efficiencies. 
+code in. If you primarily use Python, Sci-Kit learn has DBSCAN built in with some efficiencies we didn't use. 
 
 ```python
 import numpy as np
