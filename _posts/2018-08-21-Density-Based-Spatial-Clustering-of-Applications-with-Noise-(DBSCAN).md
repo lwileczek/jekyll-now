@@ -189,7 +189,7 @@ def dbscan(data, min_pts, eps, dist_func=euclidean):
 ```
 
 # Examples
-We are going to test our algorithm on the following to patters: half-moons and
+We are going to test our algorithm on the following two patters: half-moons and
 circle in a circle.
 
 ![sklearn.dataset.make_moons](/images/raw_moons.png)
