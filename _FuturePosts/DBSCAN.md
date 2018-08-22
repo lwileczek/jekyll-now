@@ -192,9 +192,58 @@ def dbscan(data, min_pts, eps, dist_func=euclidean):
 We are going to test our algorithm on the following to patters: half-moons and
 circle in a circle.
 
-![sklearn.dataset.make_moons]()
-![sklearn.dataset.make_circles]()
+![sklearn.dataset.make_moons](/images/raw_moons.png)
 
+![sklearn.dataset.make_circles](/images/raw_circles.png)
+
+If we were to naively apply K-Means we wouldn't be able to predict these two groups with much satisfaction. 
+
+![k-means moons](/images/kmeans_moon.png)
+
+![k-means circles](/images/kmeans_circles.png)
+
+the problem with the moons is they are not convex which is one of K-means assumptions. The problem with the circles is 
+the centroids cannot overlap and if they did it would return a single cluster. However, applying our code above we get the 
+following results:
+
+![my moons](/images/my_dbscan.png)
+
+![my moons](/images/my_circles.png)
+
+![Like a glove](https://media.giphy.com/media/YpRuexuyaJQ0U/giphy.gif)
+What a B-E-A-utiful algorithm. Lucky for us, DBSCAN has been added to many standard packages in Python, R, C# or whatever you 
+code in. If, like me, you are fond of python, Sci-Kit learn has DBSCAN built in with some efficiencies. 
+
+```python
+import numpy as np
+from sklearn.cluster import DBSCAN
+from sklearn.preprocessing import StandardScaler
+from sklearn.datasets import make_moons
+X, labels_true= make_moons(n_samples=750, shuffle=True, noise=0.11, random_state=42)
+X = StandardScaler().fit_transform(X)
+# Compute DBSCAN
+db = DBSCAN(eps=0.3, min_samples=10).fit(X)
+core_samples_mask = np.zeros_like(db.labels_, dtype=bool)
+core_samples_mask[db.core_sample_indices_] = True
+labels = db.labels_
+# Number of clusters in labels, ignoring noise if present.
+n_clusters_ = len(set(labels)) - (1 if -1 in labels else 0)
+```
+which produces:
+
+```sh
+Estimated number of clusters: 2
+Homogeneity: 0.995
+Completeness: 0.947
+V-measure: 0.970
+Adjusted Rand Index: 0.987
+Adjusted Mutual Information: 0.947
+Silhouette Coefficient: 0.225
+```
+
+![Sci-Kit learn DBSCAN](/images/sk.png)
+
+Sci-Kit Learn example adapted from [here](http://scikit-learn.org/stable/auto_examples/cluster/plot_dbscan.html).
 ## Caveats
 Like all clustering algorithms DBSCAN comes with a few caveats. Below are some disadvantages listed on wikipedea.
 
