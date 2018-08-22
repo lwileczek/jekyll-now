@@ -255,8 +255,8 @@ Like all clustering algorithms DBSCAN comes with a few caveats. Below are some d
   3. DBSCAN cannot cluster data sets well with large differences in densities, since the minPts-ε combination cannot then be chosen appropriately for all clusters.
   4. If the data and scale are not well understood, choosing a meaningful distance threshold ε can be difficult.
 
-If you are interested in DBSCAN it may be beneficial to investigate the [OPTICS](https://en.wikipedia.org/wiki/OPTICS_algorithm) which allows for clusters of 
-different densities. 
+If you are interested in DBSCAN it may be beneficial to investigate the [OPTICS](https://en.wikipedia.org/wiki/OPTICS_algorithm) 
+algorithm which allows clusters to have different densities. 
 
 ## Further reading
   - [Visualizing DBSCAN](https://www.naftaliharris.com/blog/visualizing-dbscan-clustering/) Very cool interactive visualization of DBSCAN
