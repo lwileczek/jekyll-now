@@ -10,7 +10,7 @@ One thing that is interesting is that we can define what _close_ means by using
 which is basically the normal way we measure distance. 
 Another way to say how DBSCAN works is it finds central or core points and finds
 which points are connected to those core points. All points reachable by the 
-core points are clustered together. A point is a core point it has some minimum 
+core points are clustered together. A point is a core point if it has some minimum 
 amount of neighbors within a given radius. A point _q_ is reachable from _p_ if 
 there is a path p<sub>1</sub>, ..., p<sub>n</sub> with p<sub>1</sub> = p and 
 p<sub>n</sub> = q, 
